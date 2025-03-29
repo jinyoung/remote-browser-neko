@@ -1018,7 +1018,7 @@ curl -X POST http://localhost:3000/screenshot --output screenshot.jpg
 이제 Playwright를 사용하여 Chromium 브라우저를 제어할 수 있는 REST API가 포함된 Docker 이미지가 준비되었습니다. 이 이미지를 빌드하고 실행하면 디버그 모드의 Chromium 브라우저와 함께 API 서버가 작동합니다.
 
 
-# Study Log:
+# 생성된 api가 호환되지 않는다... Playwright API 를 통해서 연결하도록 변경하라:
 
 
 이제 playwright-api 내의 server.js 파일을 수정하여 CDP를 통한 연결 방식을 적용해보겠습니다. 먼저 현재 server.js 파일을 확인한 후 수정하겠습니다.
