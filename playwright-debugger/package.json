@@ -1,0 +1,26 @@
+{
+  "name": "playwright-debugger",
+  "version": "1.0.0",
+  "description": "A project to connect to Chrome in debug mode using Playwright",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "advanced": "ts-node src/advanced.ts",
+    "debug": "PWDEBUG=1 ts-node src/index.ts",
+    "debug:advanced": "PWDEBUG=1 ts-node src/advanced.ts"
+  },
+  "keywords": [
+    "playwright",
+    "chrome",
+    "debugger",
+    "automation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.42.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
