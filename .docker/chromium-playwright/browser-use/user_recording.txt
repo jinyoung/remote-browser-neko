@@ -1,0 +1,68 @@
+url: https://dev.msaez.io/#/storming/b4466f9f6576d82217e90b9bb4b58a5d
+
+1. drag_and_drop
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/bounded2.png" class="cp-sticker">
+- Target: (338, 374)
+2. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#ffffff" stroke="#000000" d="M163,200Q163,199,164,199L512,199Q513,199,513,200L513,548Q513,549,512,549L164,549Q163,549,163,548Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" stroke-width="1.4" font-weight="bold" font-size="16px" r="1" id="OG_5128_2" name="ORIGINAL_NODE"></path>
+- Position: (337, 348)
+3. click
+- Element: <input autofocus="autofocus" id="elementName" type="text">
+- Position: (894, 224)
+4. input
+- Element: <input autofocus="autofocus" id="elementName" type="text" sr-value="**">
+- Value: bc
+5. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#ffffff" stroke="#000000" d="M163,200Q163,199,164,199L512,199Q513,199,513,200L513,548Q513,549,512,549L164,549Q163,549,163,548Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" stroke-width="1.4" font-weight="bold" font-size="16px" r="1" id="OG_5128_9" name="ORIGINAL_NODE"></path>
+- Position: (460, 358)
+6. drag_and_drop
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/aggregate.png" class="cp-sticker">
+- Target: (351, 358)
+7. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#f8d454" stroke="#f8d454" d="M301,309Q301,308,302,308L400,308Q401,308,401,309L401,407Q401,408,400,408L302,408Q301,408,301,407Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="0.5" font-weight="bold" font-size="16px" stroke-width="1.4" r="1" id="OG_5128_14" name="ORIGINAL_NODE"></path>
+- Position: (351, 358)
+8. click
+- Element: <input autofocus="autofocus" id="elementName" type="text">
+- Position: (783, 269)
+9. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#ffffff" stroke="#000000" d="M163,200Q163,199,164,199L512,199Q513,199,513,200L513,548Q513,549,512,549L164,549Q163,549,163,548Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" stroke-width="1.4" font-weight="bold" font-size="16px" r="1" id="OG_5128_10" name="ORIGINAL_NODE"></path>
+- Position: (268, 307)
+10. input
+- Element: <input autofocus="autofocus" id="elementName" type="text" sr-value="***">
+- Value: agg
+11. drag_and_drop
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/command.png" class="cp-sticker">
+- Target: (284, 304)
+12. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#5099f7" stroke="#5099f7" d="M234,255Q234,254,235,254L333,254Q334,254,334,255L334,353Q334,354,333,354L235,354Q234,354,234,353Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" font-weight="bold" font-size="16px" stroke-width="1.4" r="1" id="OG_5128_35" name="ORIGINAL_NODE"></path>
+- Position: (283, 300)
+13. click
+- Element: <input autofocus="autofocus" id="elementName" type="text">
+- Position: (765, 270)
+14. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#ffffff" stroke="#000000" d="M163,200Q163,199,164,199L512,199Q513,199,513,200L513,548Q513,549,512,549L164,549Q163,549,163,548Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" stroke-width="1.4" font-weight="bold" font-size="16px" r="1" id="OG_5128_10" name="ORIGINAL_NODE"></path>
+- Position: (479, 389)
+15. input
+- Element: <input autofocus="autofocus" id="elementName" type="text" sr-value="*">
+- Value: c
+16. drag_and_drop
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/event.png" class="cp-sticker">
+- Target: (420, 300)
+17. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#f1a746" stroke="#f1a746" d="M370,251Q370,250,371,250L469,250Q470,250,470,251L470,349Q470,350,469,350L371,350Q370,350,370,349Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" font-weight="bold" font-size="16px" stroke-width="1.4" r="1" id="OG_5128_56" name="ORIGINAL_NODE"></path>
+- Position: (420, 300)
+18. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#ffffff" stroke="#000000" d="M163,200Q163,199,164,199L512,199Q513,199,513,200L513,548Q513,549,512,549L164,549Q163,549,163,548Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" stroke-width="1.4" font-weight="bold" font-size="16px" r="1" id="OG_5128_10" name="ORIGINAL_NODE"></path>
+- Position: (344, 446)
+19. input
+- Element: <input autofocus="autofocus" id="elementName" type="text" sr-value="*">
+- Value: e
+20. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#5099f7" stroke="#5099f7" d="M234,255Q234,254,235,254L333,254Q334,254,334,255L334,353Q334,354,333,354L235,354Q234,354,234,353Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" font-weight="bold" font-size="16px" stroke-width="1.4" r="1" id="OG_5128_50" name="ORIGINAL_NODE"></path>
+- Position: (255, 313)
+21. click
+- Element: <rect x="344" y="344" width="20" height="20" r="0" rx="0" ry="0" fill="#ffffff" stroke="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); stroke-opacity: 0.2; cursor: pointer; position: relative;" fill-opacity="0.1" stroke-width="1" stroke-opacity="0.2" id="31879374-fd14-12c5-bcce-3fb8fed8b43a_GUIDE_LINE" class="ui-draggable ui-draggable-handle"></rect>
+- Position: (350, 350)
+22. click
+- Element: <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-weight: bold; font-size: 16px;" fill="#f1a746" stroke="#f1a746" d="M370,251Q370,250,371,250L469,250Q470,250,470,251L470,349Q470,350,469,350L371,350Q370,350,370,349Z" fill-r="1" fill-cx="0.1" fill-cy="0.1" fill-opacity="1" font-weight="bold" font-size="16px" stroke-width="1.4" r="1" id="OG_5128_68" name="ORIGINAL_NODE"></path>
+- Position: (399, 317)

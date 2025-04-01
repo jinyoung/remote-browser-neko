@@ -2,6 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { chromium } = require('playwright');
+const { exec } = require('child_process');
+const util = require('util');
+const execPromise = util.promisify(exec);
+const { spawn } = require('child_process');
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -11,76 +16,44 @@ app.use(cors());
 app.use(bodyParser.json());
 
 let browser = null;
+let context = null;
 let page = null;
 
 // 브라우저 연결 함수
 async function connectBrowser() {
   try {
-    if (!browser) {
-      console.log('Launching Playwright with connection to existing Chrome...');
-      
-      // CDP를 통해 기존 Chromium 인스턴스에 연결
       browser = await chromium.connectOverCDP('http://localhost:9222');
-      console.log('Connected to browser');
-      
-      // CDP로 연결할 때는 contexts()를 먼저 사용해야 함
-      const contexts = browser.contexts();
-      console.log(`Found ${contexts.length} browser contexts`);
-      
-      // 컨텍스트가 없으면 새로 생성
-      const context = contexts.length > 0 ? contexts[0] : await browser.newContext();
-      
-      // 컨텍스트의 페이지들 가져오기
-      const pages = await context.pages();
-      console.log(`Found ${pages.length} pages`);
-      
-      if (pages.length > 0) {
-        page = pages[0];
-        // 페이지가 로드될 때까지 기다림
-        await page.waitForLoadState('domcontentloaded');
-        console.log(`Connected to existing page: ${page.url()}`);
-        
-        try {
-          const title = await page.title();
-          console.log(`Page title: ${title}`);
-        } catch (e) {
-          console.warn('Could not get page title:', e.message);
-        }
-      } else {
-        // 새 페이지 생성
+    context = browser.contexts()[0];
+    page = context.pages()[0];
+    if (!page) {
         page = await context.newPage();
-        console.log('Created new page');
-      }
     }
-    return { browser, page };
+    return { success: true, message: 'Connected to browser' };
   } catch (error) {
     console.error('Failed to connect to browser:', error);
-    throw error;
+    return { success: false, message: error.message };
   }
 }
+
+// Initialize browser connection
+connectBrowser();
 
 // API 라우트 설정
 app.get('/status', async (req, res) => {
   try {
     const isConnected = browser !== null;
-    let title = null;
-    let url = null;
+    let title = '';
+    let url = '';
     
     if (isConnected && page) {
-      try {
-        // 페이지가 로드될 때까지 기다림
-        await page.waitForLoadState('domcontentloaded', { timeout: 5000 }).catch(() => {});
+      title = await page.title();
         url = page.url();
-        title = await page.title().catch(e => 'Unknown title: ' + e.message);
-      } catch (e) {
-        console.warn('Error getting page info:', e.message);
-      }
     }
     
     res.json({
-      status: 'OK',
-      browserConnected: isConnected,
-      currentPage: isConnected ? { title, url } : null
+      connected: isConnected,
+      title,
+      url
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -88,30 +61,8 @@ app.get('/status', async (req, res) => {
 });
 
 app.post('/connect', async (req, res) => {
-  try {
-    await connectBrowser();
-    let title = 'Unknown';
-    
-    try {
-      if (page) {
-        await page.waitForLoadState('domcontentloaded', { timeout: 5000 }).catch(() => {});
-        title = await page.title().catch(e => 'Unknown title');
-      }
-    } catch (e) {
-      console.warn('Error getting page title:', e.message);
-    }
-    
-    res.json({ 
-      success: true, 
-      message: 'Connected to browser',
-      page: {
-        title: title,
-        url: page ? page.url() : 'about:blank'
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+  const result = await connectBrowser();
+  res.json(result);
 });
 
 app.post('/navigate', async (req, res) => {
@@ -371,6 +322,51 @@ app.post('/youtube', async (req, res) => {
     }
   } catch (error) {
     console.error('YouTube navigation error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Command endpoint using browser-use
+app.post('/command', async (req, res) => {
+  try {
+    const { command } = req.body;
+    if (!command) {
+      return res.status(400).json({ error: 'Command is required' });
+    }
+
+    // Use browser-use to process the command
+    const pythonProcess = spawn('/opt/browser-use-env/bin/python', [
+      '-c',
+      `from browser_use import Agent; from langchain_openai import ChatOpenAI; import asyncio; async def run(): agent = Agent(task="${command}", llm=ChatOpenAI(model="gpt-4")); result = await agent.run(); print(result); asyncio.run(run())`
+    ]);
+
+    let output = '';
+    let error = '';
+
+    pythonProcess.stdout.on('data', (data) => {
+      output += data.toString();
+      console.log(`Python output: ${data}`);
+    });
+
+    pythonProcess.stderr.on('data', (data) => {
+      error += data.toString();
+      console.error(`Python error: ${data}`);
+    });
+
+    pythonProcess.on('close', (code) => {
+      if (code !== 0) {
+        return res.status(500).json({ error: `Command failed: ${error}` });
+      }
+      
+      res.json({ 
+        success: true, 
+        output: output.trim(),
+        message: 'Command executed successfully'
+      });
+    });
+
+  } catch (error) {
+    console.error('Error executing command:', error);
     res.status(500).json({ error: error.message });
   }
 });

@@ -4,10 +4,13 @@ FROM $BASE_IMAGE
 # Install Node.js and npm
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y --no-install-recommends curl gnupg; \
+    apt-get install -y --no-install-recommends curl gnupg python3 python3-pip python3-venv git python3-dev build-essential; \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash -; \
     apt-get update; \
     apt-get install -y --no-install-recommends nodejs; \
+    # Create virtual environment
+    python3 -m venv /opt/browser-use-env; \
+    /opt/browser-use-env/bin/pip install --upgrade pip; \
     # Install required packages for Playwright
     apt-get install -y --no-install-recommends \
         libnss3 \
@@ -33,6 +36,12 @@ RUN set -eux; \
     apt-get clean -y; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
+# Copy browser-use source code
+COPY --chown=neko browser-use/ /opt/browser-use/
+
+# Install browser-use and its dependencies
+RUN /opt/browser-use-env/bin/pip install -e /opt/browser-use/
+
 # Create API server directory
 RUN mkdir -p /home/neko/playwright-api
 WORKDIR /home/neko/playwright-api
@@ -48,7 +57,20 @@ COPY --chown=neko playwright-api/server.js .
 COPY supervisord.conf /etc/neko/supervisord/playwright-api.conf
 
 # Make sure neko user owns all files
-RUN chown -R neko:neko /home/neko/playwright-api
+RUN chown -R neko:neko /home/neko/playwright-api /opt/browser-use /opt/browser-use-env
+
+# Add virtual environment to PATH
+ENV PATH="/opt/browser-use-env/bin:${PATH}"
+ENV PYTHONPATH="/opt/browser-use:${PYTHONPATH}"
+
+# Create .env file for browser-use
+RUN echo "OPENAI_API_KEY=${OPENAI_API_KEY}" > /opt/browser-use-env/.env
+
+# Verify browser-use installation
+RUN /opt/browser-use-env/bin/browser-use --version || true
 
 # Expose port for REST API
-EXPOSE 3000 
+EXPOSE 3000
+
+# Python 패키지 설치 부분이 있다면 해당 부분에 openai 추가, 없다면 새로 추가
+RUN pip install openai langchain-openai langchain-core markdownify 

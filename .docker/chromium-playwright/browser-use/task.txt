@@ -1,0 +1,70 @@
+# python3.12 examples/ui/gradio_demo.py
+
+Go to dev.msaez.io
+
+When github login page appears:
+1. Input <secret>github_username</secret> into username field
+2. Input <secret>github_password</secret> into password field
+3. Click sign in button
+4. If "Authorize msa-ez" button appears, click it
+
+After login:
+Go to https://dev.msaez.io/#/storming/b4466f9f6576d82217e90b9bb4b58a5d
+
+* Wait for the toolbar to be fully loaded
+
+========================================
+# 사용자 요청 개선
+
+사용자 요청과 사용자 요청을 녹화한 시범 내용을 보고 사용자 요청을 
+보다 상세하게 정확한 대상 지정을 가능하도록 생성할 객체의 정보("image_name" | "class_id" | "xpath" | "element_id"), 위치정보등을 표시하여 개선해야한다. 
+사용자 요청 녹화 내용은 사용자 요청과 순서가 다르거나 누락되었을 경우가 있기때문에 사용자 요청을 우선하여야하며, 
+사용자 요청과 사용자 요청 녹화 내용의 의미를 이해하여 알맞게 매핑하여 생성해야한다.
+답변은 기존 사용자 요청을 최대한 훼손하지 않고 중간중간에 정보를 끼워넣어 표시, 개선된 사용자 요청을 기존 사용자 요청과 동일한 형태로 생성할 것
+
+* 답변 e.g. 1. "A" 객체를 생성 -> 1. "A"(A 객체에 대한 정보) 객체를 생성 
+// 사용자 요청을 제외한 그 어떠한 설명이나 말도 절대로 생성하지 말 것
+
+* 사용자 요청: 
+1. boundedContext 를 드래그해서 우측 캔버스 중심에 드롭하여 생성
+2. aggregate 를 드래그 해서 생성된 boundedContext 내부 정중앙에 드롭하여 생성
+
+* 사용자 요청 녹화 내용:
+1. drag_and_drop 
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/aggregate.png" class="cp-sticker">
+- Target: (368, 221)
+2. drag_and_drop 
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/event.png" class="cp-sticker">
+- Target: (368, 221)
+3. drag_and_drop 
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/event.png" class="cp-sticker">
+- Target: (368, 221)
+4. drag_and_drop 
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/event.png" class="cp-sticker">
+- Target: (368, 221)
+5. drag_and_drop 
+- Source: <img data-v-5dd59515="" height="30px" width="30px" src="https://dev.msaez.io/static/image/event/bounded2.png" class="cp-sticker">
+- Target: (368, 221)
+---
+1. "boundedContext"(image_name: "bounded2.png", 위치: (368, 221)) 객체를 드래그해서 우측 캔버스 중심에 드롭하여 생성
+2. "aggregate"(image_name: "aggregate.png", 위치: (368, 221)) 객체를 드래그 해서 생성된 boundedContext 내부 정중앙에 드롭하여 생성
+
+
+========================================
+Go to https://dev.msaez.io/#/storming/b4466f9f6576d82217e90b9bb4b58a5d
+
+* 각 객체를 드롭한 x, y 좌표를 기억했다가 사용자 요청에 따라 객체를 드롭할 때 사용
+
+1. boundedContext 를  드래그해서 우측 캔버스 중앙에 드롭
+2. 생성된 boundedContext 더블 클릭 후 "코드에서 사용될 이름" 에 "order" 입력 후 닫기 버튼 클릭
+3. aggregate 를 드래그해서 생성된 boundedContext "order" 정중앙에 드롭
+4. 생성된 aggregate 더블 클릭 후 "코드에서 사용될 이름" 에 "Order" 입력 후 닫기 버튼 클릭
+5. command 를 드래그해서 생성된 boundedContext "order" 정중앙에 있는 aggregate "Order" 의 좌측 상단끝 부분에 걸치게 드롭
+6. 생성된 command 더블 클릭 후 "코드에서 사용될 이름" 에 "Order" 입력 후 닫기 버튼 클릭
+7. event 를 드래그해서 생성된 boundedContext "order" 정중앙에 있는 aggregate "Order" 의  우측 상단끝 부분에 걸치게 드롭
+8. 생성된 event 더블 클릭 후 "코드에서 사용될 이름" 에 "OrderPlaced" 입력 후 닫기 버튼 클릭
+9. command "Order" 클릭
+10. command "Order" 의 우측 하단에 표시된 GUIDE_LINE 클릭
+11. event "OrderPlaced" 클릭
+
+* 사용자가 종료하기 전까지 대기
