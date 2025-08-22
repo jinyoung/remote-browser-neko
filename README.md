@@ -1,3 +1,11 @@
+# 분석
+
+1. https://www.youtube.com/watch?v=UVgs7G0UaCI
+2. https://www.youtube.com/watch?v=0uMz6TTBvG4
+3. https://www.youtube.com/watch?v=yiVMDwGFUks
+
+
+
 <div align="center">
   <a href="https://github.com/m1k1o/neko" title="Neko's Github repository.">
     <img src="https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/logo.png" width="400" height="auto"/>
